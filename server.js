@@ -22,6 +22,15 @@ app.get('/schools', async (req, res) => {
   res.json(schools);
 });
 
+app.post('/schools', async (req, res) => {
+  const { name } = req.body;
+  const newSchool = await prisma
+    .school
+    .create({ data: { name, status: 1 } });
+    
+  res.json(newSchool);
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
